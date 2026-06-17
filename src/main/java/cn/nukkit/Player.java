@@ -2332,7 +2332,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
     @Override
     public boolean onUpdate(int currentTick) {
         if (!this.loggedIn) {
-            return false;
+            return true;
         }
 
         int tickDiff = currentTick - this.lastUpdate;
@@ -6760,6 +6760,7 @@ public class Player extends EntityHuman implements CommandSender, InventoryHolde
         // Update time and weather
         level.sendTime(this);
         level.sendWeather(this);
+        this.sendPlayStatus(PlayStatusPacket.PLAYER_SPAWN);
 
         // Update game rules
         GameRulesChangedPacket packet = new GameRulesChangedPacket();

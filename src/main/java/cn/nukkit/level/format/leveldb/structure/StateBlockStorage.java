@@ -208,7 +208,7 @@ public class StateBlockStorage {
     public void writeTo(Level level, int protocol, BinaryStream stream, boolean antiXray, BlockPalette blockPalette) {
         PalettedBlockStorage palettedBlockStorage = PalettedBlockStorage.createFromBlockPalette(BitArrayVersion.V2, protocol);
 
-        if(this.bitArray.getClass() != SingletonBitArray.class) {
+        if(this.bitArray.getClass() != SingletonBitArray.class || get(0) >> Block.DATA_BITS != BlockID.AIR) {
             if (antiXray) {
                 final NukkitRandom nukkitRandom = new NukkitRandom();
                 var realOreToFakeMap = level.getAntiXraySystem().getRealOreToReplacedBlockIds();
@@ -297,7 +297,7 @@ public class StateBlockStorage {
 
     public boolean isEmpty() {
         if (this.palette.size() == 1) {
-            return true;
+            return this.palette.get(0).getLegacyId() != BlockID.AIR;
         }
 
         for (int word : this.bitArray.getWords()) {
