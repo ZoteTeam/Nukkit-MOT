@@ -158,7 +158,7 @@ publishing {
     repositories {
         maven {
             name = "luminiadev"
-            url = uri("https://repo.luminiadev.com/snapshots")
+            url = uri("https://maven.inner-core.org/snapshots")
             credentials {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_PASSWORD")
